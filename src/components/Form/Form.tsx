@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function FormSteps() {
+const FormSteps = (): JSX.Element => {
   const initialState = {
     name: "",
     surname: "",
@@ -18,6 +18,9 @@ function FormSteps() {
       [event.target.name]: event.target.value,
     });
   };
+
+  const getYears = (): number =>
+    new Date().getFullYear() - +registerData.birthdate.slice(0, 4);
 
   return (
     <Form>
@@ -52,6 +55,9 @@ function FormSteps() {
           onChange={handleChange}
           autoComplete="off"
         />
+        <Form.Text className="text-year">
+          {`You are ${getYears()} years old`}
+        </Form.Text>
       </Form.Group>
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Email address</Form.Label>
@@ -69,6 +75,6 @@ function FormSteps() {
       </Button>
     </Form>
   );
-}
+};
 
 export default FormSteps;
