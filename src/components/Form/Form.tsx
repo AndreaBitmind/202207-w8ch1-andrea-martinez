@@ -1,27 +1,71 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 function FormSteps() {
+  const initialState = {
+    name: "",
+    surname: "",
+    birthdate: "",
+    email: "",
+  };
+
+  const [registerData, setRegisterData] = useState(initialState);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRegisterData({
+      ...registerData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <Form>
       <Form.Group className="mb-3" controlId="name">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="What's your name?" />
+        <Form.Control
+          name="name"
+          type="text"
+          placeholder="What's your name?"
+          value={registerData.name}
+          onChange={handleChange}
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="surname">
         <Form.Label>Surname</Form.Label>
-        <Form.Control type="text" placeholder="What's your surname?" />
+        <Form.Control
+          name="surname"
+          type="text"
+          placeholder="What's your surname?"
+          value={registerData.surname}
+          onChange={handleChange}
+          autoComplete="off"
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="birthdate">
         <Form.Label>Birthdate</Form.Label>
-        <Form.Control type="date" placeholder="Enter your birthdate" />
+        <Form.Control
+          name="birthdate"
+          type="date"
+          placeholder="Enter your birthdate"
+          value={registerData.birthdate}
+          onChange={handleChange}
+          autoComplete="off"
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control
+          name="email"
+          type="email"
+          placeholder="Enter email"
+          value={registerData.email}
+          onChange={handleChange}
+          autoComplete="off"
+        />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Acceder
+        Submit
       </Button>
     </Form>
   );
